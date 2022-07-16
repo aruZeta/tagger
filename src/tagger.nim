@@ -7,7 +7,7 @@ proc processFields(fields: NimNode): string =
   for field in fields:
     case field.kind
     of nnkAsgn:
-      params.add field[0].strVal & "=\"" & field[1].strVal & "\""
+      params.add " " & field[0].strVal & "=\"" & field[1].strVal & "\""
     of nnkCall:
       discard # Needs implementation
     of nnkCharLit..nnkUInt64Lit:
@@ -19,10 +19,7 @@ proc processFields(fields: NimNode): string =
     else:
       discard
 
-  if params.len > 0:
-    result = " " & params
-
-  result.add(">" & content)
+  result = params & ">" & content
 
 proc tagEnd(tagName: string, closed: bool): string =
   if closed:
