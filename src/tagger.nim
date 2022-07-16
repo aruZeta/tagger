@@ -1,5 +1,10 @@
 import macros
 
+#[
+Actually only supports writing single-level tags and static content
+(no variables, proc calls, etc)
+]#
+
 type
   Tag = ref object
     name: string
