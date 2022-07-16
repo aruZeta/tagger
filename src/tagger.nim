@@ -19,16 +19,16 @@ proc processFields(fields: NimNode): string =
     else:
       discard
 
-  if params.len == 0:
-    result = ">" & content
-  else:
-    result = " " & params & ">" & content
+  if params.len > 0:
+    result = " " & params
+
+  result.add(">" & content)
 
 proc tagEnd(tagName: string, closed: bool): string =
   if closed:
-    "</" & tagName & ">"
+    result = "</" & tagName & ">"
   else:
-    "/>"
+    result = "/>"
 
 template createTagTemplate(macroName: untyped,
                            tagName: string,
