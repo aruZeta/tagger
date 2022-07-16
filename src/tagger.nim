@@ -1,42 +1,53 @@
 import macros
 
-proc processFields(fields: NimNode): string =
-  var params = ""
-  var content = ""
+type
+  Tag = ref object
+    name: string
+    params: string
+    case closed: bool
+    of true:
+      content: string
+    of false:
+      discard
 
+proc newTag(closed: bool): Tag =
+  Tag(closed: closed)
+
+proc `$`(tag: Tag): string =
+  result = "<" & tag.name & tag.params
+  if tag.closed:
+    result.add(">" & tag.content & "</" & tag.name & ">")
+  else:
+    result.add("/>")
+
+proc fillFields(tag: Tag, fields: NimNode) =
   for field in fields:
     case field.kind
     of nnkAsgn:
-      params.add " " & field[0].strVal & "=\"" & field[1].strVal & "\""
+      tag.params.add " " & field[0].strVal & "=\"" & field[1].strVal & "\""
     of nnkCall:
       discard # Needs implementation
     of nnkCharLit..nnkUInt64Lit:
-      content.add($field.intVal)
+      if tag.closed:
+        tag.content.add($field.intVal)
     of nnkFloatLit..nnkFloat64Lit:
-      content.add($field.floatVal)
+      if tag.closed:
+        tag.content.add($field.floatVal)
     of nnkStrLit..nnkTripleStrLit, nnkCommentStmt, nnkIdent, nnkSym:
-      content.add(field.strVal)
+      if tag.closed:
+        tag.content.add(field.strVal)
     else:
       discard
-
-  result = params & ">" & content
-
-proc tagEnd(tagName: string, closed: bool): string =
-  if closed:
-    result = "</" & tagName & ">"
-  else:
-    result = "/>"
 
 template createTagTemplate(macroName: untyped,
                            tagName: string,
                            closed: bool = true
                           ): untyped =
   macro `macroName`(fields: untyped): untyped =
-    result = newStrLitNode(
-      "<" & tagName &
-      processFields(fields) &
-      tagEnd(tagName, closed)
-    )
+    let tag = newTag(closed)
+    tag.name = tagName
+    fillFields(tag, fields)
+    result = newStrLitNode($tag)
 
 macro createTag*(name: untyped, closed: bool = true): untyped =
   expectKind(name, nnkIdent)
