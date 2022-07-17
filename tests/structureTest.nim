@@ -20,6 +20,11 @@ dumpTree:
           " which will be concatenated,"
           " and also numbers: " 23
           ", like echo() does"
+      hdiv:
+        "We can also use variables: "
+        someVar
+        " and proc calls: "
+        procCall()
 
 # This generates the next AST
 #[
@@ -56,29 +61,44 @@ StmtList
                 StmtList
                   StrLit "We can use multiple strings"
                   StrLit " which will be concatenated,"
-                  StrLit " and also numbers: "
-                  IntLit 23
+                  Command
+                    StrLit " and also numbers: "
+                    IntLit 23
                   StrLit ", like echo() does"
+          Call
+            Ident "hdiv"
+            StmtList
+              StrLit "We can also use variables: "
+              Ident "someVar"
+              StrLit "And proc calls: "
+              Call
+                Ident "procCall"
 ]#
 
 #[
-As you can see, the content inside a tag is anything inside the StmtList which
-is not a Asgn while Call will need to be evaluated.
+As you can see, a tag is a just a Call where it's Ident is the name of the tag
+and it's params and content are inside a StmtList, params will be Asgn and the
+rest will content.
 
-Asgn will be treated as a parameter of the tag, there won't be a checking
-whether it is an accepted parameter of that tag or not, or at least for now
-(may be convenient for generating xml which uses a xst).
+What the macro of a tag should return is an AST with the concatenated literals
+where possible, and leave the calls and variables as they are, so they can be
+parsed if they are a macro by the compiler, and if they are not, like procs or
+variables, the compiler can't do anything with them if they can just be known
+at runtime.
 
-Inside the Asgn we have:
-- A Ident, which is the name of the parameter
-- A StrLit, which is a string with its value (only accepts strings)
+So for this:
+p:
+  id = "test"
+  "Some text: "
+  someVar
 
-Call is just another tag.
+We could return a AST like this one:
+Call
+  Ident "join"
+  Ident "<p id=\"test\">Some text: "
+  Ident someVar
+  Ident "</p>"
 
-Inside a Call we have:
-- A Ident, which is the name of the tag
-- A StmtList, which is the content of the tag with what was specified above
-
-Each of the Call will need to be a macro itself, so in order to generate
-them another macro will be used such: generateTag(name = "html", closed = true)
+Where, when possible, we join the known in compiletime stuff, like in the first
+ident, and leave in a separate one the variables and calls.
 ]#
