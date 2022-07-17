@@ -1,0 +1,32 @@
+#+TITLE: Tagger, a nim library to write markup tags
+
+Writing some simple xml:
+
+#+begin_src nim
+import tagger/tagMacro
+
+createTag contacts
+createTag contact, closed = false
+
+let myContacts = contacts:
+  contact:
+    name = "Tony"
+    phone = "654435435"
+  contact:
+    name = "Spammer"
+    phone = "654435436"
+
+echo myContacts
+#+end_src
+
+Gives us:
+
+#+begin_src xml
+<contacts>
+  <contact name="Tony" phone="654435435"/>
+  <contact name="Spammer" phone="654435436"/>
+</contacts>
+#+end_src
+
+Note: actually writes an obfuscated version (no indentation nor
+newlines).
