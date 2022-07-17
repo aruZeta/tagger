@@ -1,8 +1,8 @@
 type
   Tag* = ref object
-    name: string
-    params: string
-    case closed: bool
+    name*: string
+    params*: string
+    case closed*: bool
     of true:
       content*: string
     of false:
@@ -10,6 +10,10 @@ type
 
 proc addParam*(tag: Tag, param: string, value: string) =
   tag.params.add(" " & param & "=\"" & value & "\"")
+
+# Used to get a valid param string
+proc newParam*(param: string, value: string): string =
+  result = " " & param & "=\"" & value & "\""
 
 proc newTag*(name: string, closed: bool): Tag =
   Tag(name: name, closed: closed)
