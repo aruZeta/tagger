@@ -15,7 +15,7 @@ proc addParam*(tag: Tag, param: string, value: string) =
 proc newParam*(param: string, value: string): string =
   result = " " & param & "=\"" & value & "\""
 
-proc newTag*(name: string, closed: bool): Tag =
+proc newTag*(name: string, closed: bool = true): Tag =
   Tag(name: name, closed: closed)
 
 proc `$`*(tag: Tag): string =
