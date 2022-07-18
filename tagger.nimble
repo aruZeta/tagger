@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.0.1"
+version       = "0.1.0"
 author        = "aruZeta"
 description   = "A library to generate xml and html tags"
 license       = "MIT"
