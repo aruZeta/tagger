@@ -2,7 +2,7 @@ import std/macros
 from std/strutils import join
 
 type
-  TagMacro* = ref object
+  TagMacro = ref object
     name*: string
     params*: seq[NimNode]
     case closed*: bool
