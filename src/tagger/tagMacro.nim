@@ -3,6 +3,8 @@ from std/strutils import join
 
 type
   TagMacro = ref object
+    ## A tag object used by a tag macro to hold the name of the tag, params and
+    ## contents if it's a closed tag (closed: `<p></p>`, not closed: `<img/>`)
     name*: string
     params*: seq[NimNode]
     case closed*: bool
@@ -12,6 +14,8 @@ type
       discard
 
 proc getNodeArray(tag: TagMacro): NimNode =
+  ## Returns the AST of an array containing all the components which
+  ## concatenated form a string representing the tag `tag`
   result = nnkBracket.newTree()
   var lastNode: string = "<" & tag.name
 
@@ -45,6 +49,8 @@ proc getNodeArray(tag: TagMacro): NimNode =
     result.add newLit(lastNode)
 
 proc fillFields(tag: TagMacro, fields: NimNode) =
+  ## Loops through the fields of a tag macro, if the field is a paramater
+  ## it is added to the tag's paramater list, if not to the tag's content list
   for field in fields:
     case field.kind
     of nnkAsgn:
@@ -58,6 +64,10 @@ macro createTag*(macroName: untyped,
                  tagName: string = "",
                  closed: bool = true
                 ): untyped =
+  ## Creates a new macro named `macroName` which is used to generate a tag
+  ## named `tagName` (by default is the same as the `macroName` unless it
+  ## is specified otherwise). The tag can be closed or not (by default it's
+  ## closed). A closed tag looks like: `<p></p>`, and not closed: `<img/>`
   let
     actualMacroName = newIdentNode(macroName.strVal)
     name = if tagName.strVal.len == 0:
