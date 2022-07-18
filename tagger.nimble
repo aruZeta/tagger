@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.0.1"
+version       = "0.1.0"
 author        = "aruZeta"
 description   = "A library to generate xml and html tags"
 license       = "MIT"
@@ -8,4 +8,5 @@ srcDir        = "src"
 
 # Dependencies
 
-requires "nim >= 1.6.6"
+# I have only tested with 0.20.2 and 1.6.6
+requires "nim >= 0.20.2"
