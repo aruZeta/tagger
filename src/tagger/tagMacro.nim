@@ -87,4 +87,29 @@ macro createTag*(macroName: untyped,
         getNodeArray tag
       )
 
+macro createTagPublic*(macroName: untyped,
+                       tagName: string = "",
+                       closed: bool = true
+                      ): untyped =
+  ## Same as createTag but makes the tag macro public so it can be accesed from
+  ## other modules.
+  let
+    tagName =
+      if tagName.strVal.len == 0:
+        macroName.strVal
+      else:
+        tagName.strVal
+    macroName = newIdentNode(macroName.strVal)
+  result = quote do:
+    macro `macroName`*(fields: untyped): untyped =
+      let tag = TagMacro(
+        name: `tagName`,
+        closed: `closed`
+      )
+      fillFields tag, fields
+      result = newCall(
+        newIdentNode("join"),
+        getNodeArray tag
+      )
+
 export join
