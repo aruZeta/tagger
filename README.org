@@ -32,6 +32,17 @@ Note: actually writes an obfuscated version (no indentation nor
 newlines).
 
 Note: when defining tag parameters, you may want to write a paramater
-which happens to be a reserved keyword, like =type= or =method=, in
-those cases you just need to surround it with =""=, so
-="type" = "text"=.
+which happens to be a reserved keyword, like ~type~ or ~method~, in
+those cases you just need to surround it with double quotes.
+
+#+begin_src nim
+form:
+  action = "login"
+  "method" = "post"
+  input:
+    "type" = "text"
+    name = "username"
+  input:
+    "type" = "submit"
+    value = "Login"
+#+end_src
