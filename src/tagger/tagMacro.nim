@@ -69,15 +69,41 @@ macro createTag*(macroName: untyped,
   ## is specified otherwise). The tag can be closed or not (by default it's
   ## closed). A closed tag looks like: `<p></p>`, and not closed: `<img/>`
   let
-    actualMacroName = newIdentNode(macroName.strVal)
-    name = if tagName.strVal.len == 0:
-             macroName.strVal
-           else:
-             tagName.strVal
+    tagName =
+      if tagName.strVal.len == 0:
+        macroName.strVal
+      else:
+        tagName.strVal
+    macroName = newIdentNode(macroName.strVal)
   result = quote do:
-    macro `actualMacroName`(fields: untyped): untyped =
+    macro `macroName`(fields: untyped): untyped =
       let tag = TagMacro(
-        name: `name`,
+        name: `tagName`,
+        closed: `closed`
+      )
+      fillFields tag, fields
+      result = newCall(
+        newIdentNode("join"),
+        getNodeArray tag
+      )
+
+macro createTagPublic*(macroName: untyped,
+                       tagName: string = "",
+                       closed: bool = true
+                      ): untyped =
+  ## Same as createTag but makes the tag macro public so it can be accesed from
+  ## other modules.
+  let
+    tagName =
+      if tagName.strVal.len == 0:
+        macroName.strVal
+      else:
+        tagName.strVal
+    macroName = newIdentNode(macroName.strVal)
+  result = quote do:
+    macro `macroName`*(fields: untyped): untyped =
+      let tag = TagMacro(
+        name: `tagName`,
         closed: `closed`
       )
       fillFields tag, fields
