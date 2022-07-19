@@ -28,8 +28,44 @@ Gives us:
 </contacts>
 #+end_src
 
+You can also write html with predefined tags:
+
+#+begin_src nim
+import tagger/html
+
+let htmlPage = html:
+  head:
+    title:
+      "A simple html page"
+  body:
+    hdiv:
+      p:
+        "A simple paragraph"
+
+echo htmlPage
+#+end_src
+
+Gives us:
+
+#+begin_src html
+<html>
+  <head>
+    <title>A simple html page</title>
+  </head>
+  <body>
+    <div>
+      <p>A simple paragraph</p>
+    </div>
+  </body>
+</html>
+#+end_src
+
 Note: actually writes an obfuscated version (no indentation nor
 newlines).
+
+Note: when using the html tag macros, some of them happen to be named
+the same as some keywords, like ~div~, so in order to avoid this
+limitation an ~h~ is added at the start (from html), so ~hdiv~.
 
 Note: when defining tag parameters, you may want to write a paramater
 which happens to be a reserved keyword, like ~type~ or ~method~, in
