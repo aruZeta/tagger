@@ -52,3 +52,11 @@ test "Complex tag with vars and proc calls":
       loremChild
 
   check tag == """<div id="parent">Ipsam minus sunt saepe.<p id="child">Ipsum in laudantium dolorum quia.</p></div>"""
+
+test "Quoted parameters":
+  createTag input, closed = false
+
+  let tag = input:
+    "type" = "text"
+
+  check tag == """<input type="text"/>"""
