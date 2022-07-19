@@ -1,126 +1,128 @@
-import tagger/tagMacro
+import tagMacro
 
 # <!DOCTYPE> - needs implementation
 
-createTag a
-createTag abbr
-createTag acronym
-createTag address
-createTag applet
-createTag area, closed = false
-createTag article
-createTag aside
-createTag audio
-createTag b
-createTag base, closed = false
-createTag basefont
-createTag bdi
-createTag bdo
-createTag big
-createTag blockquote
-createTag body
-createTag br, closed = false
-createTag button
-createTag canvas
-createTag caption
-createTag center
-createTag cite
-createTag code
-createTag col, closed = false
-createTag colgroup
-createTag data
-createTag datalist
-createTag dd
-createTag hdel, tagName = "del"
-createTag details
-createTag dfn
-createTag dialog
-createTag dir
-createTag hdiv, tagName = "div"
-createTag dl
-createTag dt
-createTag em
-createTag embed, closed = false
-createTag fieldset
-createTag figcaption
-createTag figure
-createTag font
-createTag footer
-createTag form
-createTag frame
-createTag frameset
-createTag h1
-createTag h2
-createTag h3
-createTag h4
-createTag h5
-createTag h6
-createTag head
-createTag header
-createTag hr, closed = false
-createTag html
-createTag i
-createTag iframe
-createTag img, closed = false
-createTag input, closed = false
-createTag ins
-createTag kbd
-createTag label
-createTag legend
-createTag li
-createTag link, closed = false
-createTag main
-createTag map
-createTag mark
-createTag meta, closed = false
-createTag meter
-createTag nav
-createTag noframes
-createTag noscript
-createTag hobject, tagName = "object"
-createTag ol
-createTag optgroup
-createTag option
-createTag output
-createTag p
-createTag param, closed = false
-createTag picture
-createTag pre
-createTag progress
-createTag q
-createTag rp
-createTag rt
-createTag ruby
-createTag s
-createTag samp
-createTag script
-createTag section
-createTag select
-createTag small
-createTag source, closed = false
-createTag span
-createTag strike
-createTag strong
-createTag style
-createTag sub
-createTag summary
-createTag sup
-createTag svg
-createTag table
-createTag tbody
-createTag td
-createTag htemplate, tagName = "template"
-createTag textarea
-createTag tfoot
-createTag th
-createTag thead
-createTag time
-createTag title
-createTag tr
-createTag track, closed = false
-createTag tt
-createTag u
-createTag ul
-createTag hvar, tagName = "var"
-createTag video
-createTag wbr
+createTagPublic a
+createTagPublic abbr
+createTagPublic acronym
+createTagPublic address
+createTagPublic applet
+createTagPublic area, closed = false
+createTagPublic article
+createTagPublic aside
+createTagPublic audio
+createTagPublic b
+createTagPublic base, closed = false
+createTagPublic basefont
+createTagPublic bdi
+createTagPublic bdo
+createTagPublic big
+createTagPublic blockquote
+createTagPublic body
+createTagPublic br, closed = false
+createTagPublic button
+createTagPublic canvas
+createTagPublic caption
+createTagPublic center
+createTagPublic cite
+createTagPublic code
+createTagPublic col, closed = false
+createTagPublic colgroup
+createTagPublic data
+createTagPublic datalist
+createTagPublic dd
+createTagPublic hdel, tagName = "del"
+createTagPublic details
+createTagPublic dfn
+createTagPublic dialog
+createTagPublic dir
+createTagPublic hdiv, tagName = "div"
+createTagPublic dl
+createTagPublic dt
+createTagPublic em
+createTagPublic embed, closed = false
+createTagPublic fieldset
+createTagPublic figcaption
+createTagPublic figure
+createTagPublic font
+createTagPublic footer
+createTagPublic form
+createTagPublic frame
+createTagPublic frameset
+createTagPublic h1
+createTagPublic h2
+createTagPublic h3
+createTagPublic h4
+createTagPublic h5
+createTagPublic h6
+createTagPublic head
+createTagPublic header
+createTagPublic hr, closed = false
+createTagPublic html
+createTagPublic i
+createTagPublic iframe
+createTagPublic img, closed = false
+createTagPublic input, closed = false
+createTagPublic ins
+createTagPublic kbd
+createTagPublic label
+createTagPublic legend
+createTagPublic li
+createTagPublic link, closed = false
+createTagPublic main
+createTagPublic map
+createTagPublic mark
+createTagPublic meta, closed = false
+createTagPublic meter
+createTagPublic nav
+createTagPublic noframes
+createTagPublic noscript
+createTagPublic hobject, tagName = "object"
+createTagPublic ol
+createTagPublic optgroup
+createTagPublic option
+createTagPublic output
+createTagPublic p
+createTagPublic param, closed = false
+createTagPublic picture
+createTagPublic pre
+createTagPublic progress
+createTagPublic q
+createTagPublic rp
+createTagPublic rt
+createTagPublic ruby
+createTagPublic s
+createTagPublic samp
+createTagPublic script
+createTagPublic section
+createTagPublic select
+createTagPublic small
+createTagPublic source, closed = false
+createTagPublic span
+createTagPublic strike
+createTagPublic strong
+createTagPublic style
+createTagPublic sub
+createTagPublic summary
+createTagPublic sup
+createTagPublic svg
+createTagPublic table
+createTagPublic tbody
+createTagPublic td
+createTagPublic htemplate, tagName = "template"
+createTagPublic textarea
+createTagPublic tfoot
+createTagPublic th
+createTagPublic thead
+createTagPublic time
+createTagPublic title
+createTagPublic tr
+createTagPublic track, closed = false
+createTagPublic tt
+createTagPublic u
+createTagPublic ul
+createTagPublic hvar, tagName = "var"
+createTagPublic video
+createTagPublic wbr
+
+export join
